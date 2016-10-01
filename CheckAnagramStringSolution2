@@ -1,0 +1,47 @@
+package com.codes.complex.strings;
+
+/*
+ * First you can convert one of the given Sting to character array and then check 
+ * whether all the characters are available in another string. If all the characters are not available 
+ * in another string or another string contains more characters then the given strings are not Anagram else 
+ * given Strings are Anagram.
+ */
+
+public class CheckAnagramStringSolution2 {  
+    /** 
+     * This method creates character array of given string and then one by one 
+     * checks the character is available in another string and if available 
+     * deletes the character from the String. If the character is not available 
+     * in given string it considers the given strings are not anagram or if the 
+     * string contains more characters than the character array it considers the 
+     * given strings are not anagram else the given strings are anagram. 
+     *  
+     * @param string1 
+     * @param string2 
+     * @return 
+     */  
+    public static boolean isAnagramString(String string1, String string2) {  
+        char[] string1Array = string1.replaceAll(" ", "").toUpperCase().toCharArray();  
+        StringBuilder tempString = new StringBuilder(string2.replace(" ", "").toUpperCase());  
+        for (char ch : string1Array) {  
+            int index = tempString.indexOf("" + ch);  
+            if (index != -1) {  
+                tempString.deleteCharAt(index);  
+            } else {  
+                return false;  
+            }  
+        }  
+        return tempString.length() == 0 ? true : false;  
+    }  
+  
+    public static void main(String[] str) {  
+        String string1 = "Anna Madrigal";  
+        String string2 = "A man and a girl";  
+        if (isAnagramString(string1, string2)) {  
+            System.out.println("Given String is Anagram");  
+        } else {  
+            System.out.println("Given String is not Anagram");  
+        }  
+  
+    }  
+}
