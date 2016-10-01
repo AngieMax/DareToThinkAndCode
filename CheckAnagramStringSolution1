@@ -1,0 +1,47 @@
+package com.codes.complex.strings;
+
+/*
+ * The problem states to implement  a program to find whether two strings are Anagram or not. 
+ * 
+ * Anagram : An anagram is a type of word play, the result of rearranging the letters of a word
+ *  or phrase to produce a new word or phrase, using all the original letters exactly once; for example, 
+ *  the word anagram can be rearranged into nag-a-ram.
+ *  Examples : 
+ * "Anna Madrigal" = "A man and a girl"
+ * "Buckethead" = "Death Cube K"
+ * 
+ * Solution1 : To check whether the given strings are Anagram or not first you can create an Array 
+ * of character from the given strings and sort the obtained arrays alphabetically. Now compare both arrays. 
+ * If both of the arrays are equal then the given strings are Anagram else not.
+ */
+import java.util.Arrays;  
+
+public class CheckAnagramStringSolution1 {  
+    /** 
+     * This method creates character array of given strings and then sort both 
+     * string based on character and compares if both of them are equal. 
+     * @param string1 
+     * @param string2 
+     * @return 
+     */  
+    public static boolean isAnagramString(String string1, String string2) {  
+        char[] string1CharArray = string1.replaceAll(" ", "").toLowerCase()  
+                .toCharArray();  
+        char[] string2CharArray = string2.replaceAll(" ", "").toLowerCase()  
+                .toCharArray();  
+        Arrays.sort(string1CharArray);  
+        Arrays.sort(string2CharArray);  
+        return Arrays.equals(string1CharArray, string2CharArray);  
+    }  
+  
+    public static void main(String[] str) {  
+        String string1 = "Anna Madrigal";  
+        String string2 = "A man and a girl";  
+        if (isAnagramString(string1, string2)) {  
+            System.out.println("Given String is Anagram");  
+        } else {  
+            System.out.println("Given String is not Anagram");  
+        }  
+  
+    }  
+}
