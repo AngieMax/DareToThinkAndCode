@@ -1,0 +1,74 @@
+package com.codes.complex.strings;
+
+/*
+ * Alice is taking a cryptography class and finding anagrams to be very useful. We consider two strings to be anagrams of each other
+ *  if the first string's letters can be rearranged to form the second string. In other words, both strings must contain 
+ *  the same exact letters in the same exact frequency For example, bacdc and dcbac are anagrams, but bacdc and dcbad are not.
+
+Alice decides on an encryption scheme involving two large strings where encryption is dependent on the minimum
+ number of character deletions required to make the two strings anagrams. Can you help her find this number?
+
+Given two strings,  and , that may or may not be of the same length, determine the minimum number of character
+ deletions required to make  and  anagrams. Any characters can be deleted from either of the strings.
+Input Format
+The first line contains a single string,a . 
+The second line contains a single string,b .
+ 
+ Output Format
+
+Print a single integer denoting the number of characters you must delete to make the two strings anagrams of each other.
+
+ */
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+public class CreateAnagramsSolution {
+	
+	
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String first = in.next();
+        String second = in.next();
+        System.out.println(numberNeeded(first, second));
+    }
+    
+	public static int numberNeeded(String first, String second) {
+	    
+		if(first==null || second==null)
+			return 0;
+		
+		char[] str1=first.replaceAll(" ", "").toLowerCase().toCharArray();
+		char[] str2=second.replaceAll(" ", "").toLowerCase().toCharArray();
+		
+		Map<Character,Integer> count =new HashMap<Character,Integer>();
+		
+		for(char c1:str1){
+			int ct=count.containsKey(c1) ?count.get(c1):0;
+			count.put(c1, (ct+1));
+		}
+		
+		for(char c2:str2){
+			int ct=count.containsKey(c2) ? count.get(c2):0;
+			count.put(c2, (ct-1));
+		}
+			
+		/*Set<Character> setcount=count.keySet();
+		System.out.println(" Listing Map ");
+		for(Character ch:setcount){
+			System.out.println(ch+ ": Value : " +count.get(ch));
+		}*/
+		
+		List<Integer> values=new ArrayList<Integer>(count.values());
+		int total=0;
+		for(Integer v:values){
+			total+=Math.abs(v);
+		}
+		return total;
+    }
+
+
+}
